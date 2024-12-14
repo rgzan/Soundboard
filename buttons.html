@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soundboard</title>
+</head>
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    color:white;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    height:100vh;
+}
+.nav-container{
+    width:100%;
+    height:50px;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    z-index:1000;
+}
+.navbar {
+    display:flex;
+    gap:20px;
+}
+.navbar a{
+    color:white;
+    text-decoration: none;
+    padding:10px 15px;
+    font-size:16px;
+    transition: background 0.3s ease;
+}
+.navbar a:hover{
+    background:limegreen;
+    border-radius:5px;
+}
+#buttonContainer {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top:80px;
+    gap:15px;
+    width:100%;
+}
+button{
+    background-color:green;
+    color:black;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor: pointer;
+    font-size:14px;
+    min-width:150px;
+}
+.dynamic-button{
+    background:green;
+    color:white;
+}
+.dynamic-button:hover {
+    background:limegreen;
+}
+</style>
+<body>
+    <div class="nav-container">
+        <p>Soundboard</p>
+        <nav class="navbar">
+            <a href="#">Login</a>
+            <a href="#">Options</a>
+            <a href="#">Help</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </div>
+    <div id="buttonContainer" role="group"></div>
+<script>
+document.body.style.background = "linear-gradient(to left, rgb(100,100,0), rgba(50,100,50))";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const buttonContainer = document.createElement('div');
+    buttonContainer.id = 'buttonContainer';
+    buttonContainer.setAttribute('role', 'group');
+    document.body.appendChild(buttonContainer);
+
+    function createButton(label, onClickFunction) {
+        const button = document.createElement('button');
+        button.className = 'dynamic-button';
+        button.textContent = label;
+        button.addEventListener('click', onClickFunction);
+        buttonContainer.appendChild(button);
+    }
+    createButton('Triple Redshell', () => alert('Triple Redshell!'));
+    createButton('Triple Greenshell', () => alert('Triple Greenshell!'));
+    createButton('Triple Bananas', () => alert('Triple Bananas!'));
+    createButton('I have shock', () => alert('I have shock!'));
+    createButton('I have blue', () => alert('I have blue!'));
+    createButton('Join call', () => alert('Join call!'));
+    createButton('They have blue', () => alert('They have blue!'));
+    createButton('They have shock', () => alert('They have shock!'));
+    createButton('Use it Now!', () => alert('Use it Now!'));
+});
+</script>
+</body>
+</html>
