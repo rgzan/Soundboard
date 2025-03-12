@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html style="font-size:26px; font-family:sans-serif;" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soundboard-Update</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<style>
+body {
+    background:
+        repeating-linear-gradient(45deg, #000000 5px, #fa9e00 50px),
+        repeating-linear-gradient(100deg, #646400, rgba(208, 181, 76, 0.8)),
+        repeating-linear-gradient(75deg, rgba(0,0,0,0.5), rgba(255,255,255,0.2));
+    background-size: 100% 100%;
+    background-blend-mode: multiply;
+    width: 100vw;
+    background-attachment:fixed;
+}
+
+header{
+    width:100%;
+    height:55.5px;
+    background:black;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    z-index:10;
+}
+.top-container{
+    display:flex;
+    align-items: center;
+    padding:0 10px;
+}
+.top-container .logo{
+    color:white;
+    text-decoration: none;
+    font-size:26px;
+}
+/* Center Section */
+.center{
+    display:flex;
+    justify-content: center;
+    align-items: flex-end;
+    width:40%;
+    gap:20px;
+    padding:0;
+}
+/* Chatbubble, Chatbubble alert */
+.chatbble{
+    color:grey;
+    top:5px;
+    left:45%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: all;
+}
+.chatbble ion-icon{
+    width:35px;
+    height:35px;
+    padding:5px 5px;
+    border-radius: 5%;
+    transition: 0.3s background;
+}
+.chatbble:hover ion-icon{
+    background-color:darkgrey;
+}
+/* Notifications, Notification alerts */
+.notification-icon{
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    top:5px;
+    left:52%;
+    position:absolute;
+    width:35px;
+    height:35px;
+    padding:5px 5px;
+    cursor:pointer;
+    border-radius: 5%;
+    transition: 0.3s background;
+}
+.notification-icon:hover{
+    background:darkgrey;
+}
+.notifications-badge{
+    position:absolute;
+    top:-2px;
+    right:-2px;
+    background:red;
+    color:white;
+    font-size:12px;
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    display:none;
+    align-items: center;
+    justify-content: center;
+    z-index:1;
+}
+.notifications-badge.visible {
+    display:flex;
+}
+.notifications-dropdown{
+    font-size: 21px;
+    display:flex;
+    flex-direction: column;
+    position:absolute;
+    top:48.99px;
+    right:0;
+    background:black;
+    border-radius:5px;
+    width:200px;
+    box-shadow:0 2px rgba(0,0,0,0.2);
+    z-index:1000;
+    display: none;
+    cursor:pointer;
+    pointer-events: all;
+    max-height:300px;
+    overflow-y: auto;
+}
+.notifications-dropdown.show{
+    display:block;
+}
+.notifications-dropdown ul{
+    margin:0;
+    padding:0;
+}
+.notifications-dropdown li{
+    border-radius: 5px;
+    padding:6px;
+    list-style: none;
+}
+.notifications-dropdown li:hover{
+    background-color: grey;
+}
+/* unused floating-box, already replaced this with alertbox for notifcation-badge */
+/*.floating-box{
+    display:none;
+    position:fixed;
+    font-size:15px;
+    bottom:10px;
+    right:20px;
+    background-color:black;
+    color:white;
+    padding:10px 20px;
+    border-radius:5px;
+    opacity: 0.9;
+    transform:translate(0px, 0px);
+    transition:opacity 0.3s ease, transform 0.3 ease;
+}
+.floating-box.show{
+    display:block;
+} */
+/* Navgations, a */
+.navbar {
+    display:flex;
+}
+.navbar a{
+    text-decoration: none;
+    padding:0 10px;
+    color:grey;
+    transition: background 0.3s ease;
+}
+.navbar a:hover{
+    background:darkgrey;
+}
+.nav-item{
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+    border-radius: 5%;
+    transition: background 0.3s;
+}
+.nav-item:hover{
+    background:darkgrey;
+}
+.nav-content{
+    display:flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+.nav-content ion-icon,
+.nav-content svg{
+    width:35px;
+    height:35px;
+}
+.text{
+    font-size:13px;
+}
+/* Mobile Menu Icon */
+.menu-icon{
+    position:fixed;
+    flex-direction: column;
+    top:12px;
+    right:10px;
+    z-index:20;
+    cursor:pointer;
+}
+.menu-icon div{
+    width:25px;
+    height:1px;
+}
+@media (max-width:1242px) {
+    .text{
+        font-size:10px;
+    }
+    .notification-icon{
+        left:52%;
+        transition: background 0.3s ease;
+    }
+    .chatbble{
+    left:45%;
+    }
+}
+@media (max-width:1080px) {
+    .text{
+        font-size:15px;
+        padding:8px;
+    }
+    .navbar{
+        flex-direction:column;
+        background:black;
+        position:absolute;
+        top:55px;
+        right:0;
+        padding:0;
+        width:200px;
+        display:none;
+        pointer-events: none;
+    }
+    .navbar.open{
+        display:flex;
+        pointer-events:auto;
+    }    
+    .nav-content{
+        flex-direction: row;
+    }
+    .menu-icon{
+        width:50px;
+        height:50px;
+    }
+}
+@media (min-width:325px) and (max-width:1072px){
+    .chatbble{
+        left:45%;
+    }
+    .notification-icon{
+        left:52%;
+        transition: background 0.3s ease;
+    }
+    .text{
+        font-size:15px;
+        padding:8px;
+    }
+    .navbar{
+        flex-direction:column;
+        background:black;
+        position:absolute;
+        top:55px;
+        right:0;
+        padding:0;
+        width:200px;
+        display:none;
+        pointer-events: none;
+    }
+    .navbar.open{
+        display:flex;
+        pointer-events:auto;
+    }
+    .nav-content{
+        flex-direction: row;
+    }
+    .menu-icon{
+        width:50px;
+        height:50px;
+    }
+}
+@media (max-width:760px) {
+    .chatbble{
+        left:45%;
+    }
+    .notification-icon{
+        left:52%;
+    }
+}
+</style>
+</head>
+<body>
+<header>
+<div class="top-container">
+    <a href="0Soundboard-sign.html" onclick="redirectUser(event)" class="logo">Soundboard</a>
+</div>
+<div class="center">
+    <!-----ChatBubble------------------------------------------->
+    <a href="7Chatbubble.html" onclick="redirectUser(event)" class="nav-item">
+        <div class="chatbble" role="Chatbubble">
+            <ion-icon name="chatbubbles-sharp"></ion-icon>
+        </div>
+    </a>
+        <!-- Notification Bell -->
+    <div class="notifications">
+        <div class="notification-icon" id="notificationIcon" aria-label="Notifications">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="30" height="30" fill="grey">
+                <path d="M56,44c-1.832,0-4-2.168-4-4V20C52,8.973,43.027,0,32,0S12,8.973,12,20v20c0,1.793-2.207,4-4,4 
+                    c-2.211,0-4,1.789-4,4s1.789,4,4,4h48c2.211,0,4-1.789,4-4S58.211,44,56,44z"></path>
+                <path d="M32,64c4.418,0,8-3.582,8-8H24C24,60.418,27.582,64,32,64z"></path>
+            </svg>
+<!--------Notifications alert will be appeared------------>
+        <span class="notifications-badge" id="notificationsBadge">3</span>
+            <div class="notifications-dropdown" id="notificationsDropdown">
+                <ul id="notificationsList">
+                    <li>No new notifications</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--------Menu Bars-------------------------------------------------------------->
+<div class="menu-icon" id="menuIcon">
+    <svg viewBox="1 5 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 7C5 6.44772 5.44772 6 6 6H18C18.5523 6 19 6.44772 19 7C19 7.55228 18.5523 8 18 8H6C5.44772 8 5 7.55228 5 7ZM5 12C5 11.4477 5.44772 11 6 11H18C18.5523 11 19 11.4477 19 12C19 12.5523 18.5523 13 18 13H6C5.44772 13 5 12.5523 5 12ZM5 17C5 16.4477 5.44772 16 6 16H18C18.5523 16 19 16.4477 19 17C19 17.5523 18.5523 18 18 18H6C5.44772 18 5 17.5523 5 17Z" fill="grey"></path>
+    </svg>
+</div>
+<!-- Navbar Links -->
+<nav class="navbar" id="navbar">
+    <a href="0Soundboard-sign.html" onclick="redirectUser(event)" class="nav-item" role="Soundboard-logo">
+        <div class="nav-content">
+            <svg viewBox="2 0 20 20" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" stroke="grey">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier"><defs></defs>
+                <line class="cls-1" x1="0.5" y1="21.58" x2="6.25" y2="21.58"></line>
+                <line class="cls-1" x1="9.13" y1="21.58" x2="14.88" y2="21.58"></line>
+                <line class="cls-1" x1="17.75" y1="21.58" x2="23.5" y2="21.58"></line>
+                <line class="cls-1" x1="0.5" y1="17.75" x2="6.25" y2="17.75"></line>
+                <line class="cls-1" x1="9.13" y1="17.75" x2="14.88" y2="17.75"></line>
+                <line class="cls-1" x1="17.75" y1="17.75" x2="23.5" y2="17.75"></line>
+                <line class="cls-1" x1="0.5" y1="13.92" x2="6.25" y2="13.92"></line>
+                <line class="cls-1" x1="9.13" y1="13.92" x2="14.88" y2="13.92"></line>
+                <line class="cls-1" x1="17.75" y1="13.92" x2="23.5" y2="13.92"></line>
+                <line class="cls-1" x1="9.13" y1="10.08" x2="14.88" y2="10.08"></line>
+                <line class="cls-1" x1="17.75" y1="10.08" x2="23.5" y2="10.08"></line>
+                <line class="cls-1" x1="9.13" y1="6.25" x2="14.88" y2="6.25"></line>
+                <line class="cls-1" x1="9.13" y1="2.42" x2="14.88" y2="2.42"></line></g>
+            </svg>
+            <span class="text">Soundboard</span>
+        </div>
+    </a>
+    <a href="2Donation.html" onclick="redirectUser(event)" class="nav-item" role="Donation-logo">
+        <div class="nav-content">
+            <ion-icon name="heart-outline"></ion-icon>
+            <span class="text">Donation</span>
+        </div>
+    </a>
+    <a href="3Profile.html" onclick="redirectUser(event)" class="nav-item" role="Profile-logo">
+        <div class="nav-content">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <span class="text">Profile</span>
+        </div>
+    </a>
+    <a href="4Invite-Bot.html" onclick="redirectUser(event)" class="nav-item" role="Invite Bot-logo">
+        <div class="nav-content">
+            <svg fill="grey" viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path d="M21.928 11.607c-.202-.488-.635-.605-.928-.633V8c0-1.103-.897-2-2-2h-6V4.61c.305-.274.5-.668.5-1.11a1.5 
+                1.5 0 0 0-3 0c0 .442.195.836.5 1.11V6H5c-1.103 0-2 .897-2 2v2.997l-.082.006A1 1 0 0 0 1.99 12v2a1 1 0 0 0 1 1H3v5c0 
+                1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5a1 1 0 0 0 1-1v-1.938a1.006 1.006 0 0 0-.072-.455zM5 20V8h14l.001 
+                3.996L19 12v2l.001.005.001 5.995H5z"></path>
+                <ellipse cx="8.5" cy="12" rx="1.5" ry="2">
+                </ellipse><ellipse cx="15.5" cy="12" rx="1.5" ry="2">
+                </ellipse><path d="M8 16h8v2H8z"></path></g></svg>
+                <span class="text">Invite Bot</span>
+            </div>
+    </a>
+    <a href="5Contact.html" onclick="redirectUser(event)" class="nav-item" role="Contact-logo">
+        <div class="nav-content">
+            <ion-icon name="mail-outline"></ion-icon>
+            <span class="text">Contact us</span>
+        </div>
+    </a>
+    <a href="6AboutUs.html" onclick="redirectUser(event)" class="nav-item" role="About Us-logo">
+        <div class="nav-content">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span class="text">About us</span>
+        </div>
+    </a>
+    <a href="1Login.html" onclick="redirectUser(event)" class="nav-item" role="Login-signout-logo">
+        <div class="nav-content">
+            <ion-icon name="log-out-outline"></ion-icon>
+            <span class="text">Sign out</span>
+        </div>
+    </a>
+</nav>
+</header>
+<style>
+    #particles-js{
+        position:absolute;
+        width:100%;
+        height:100vh;
+        opacity:0.1;
+    }
+</style>
+<div id="particles-js"></div>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80},
+                color: { value: '#ffffff'},
+                shape: { type: 'circle'},
+                move: {speed: 2},
+            }
+        });
+</script>
+<!--<div id="notification" class="floating-box"></div> Unused floating box, already added alertbox for notification-badge -->
+<script>
+//----------MenuBars-------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function() {
+    // Menu toggle logic
+    const menuIcon = document.getElementById("menuIcon");
+    const navbar = document.getElementById("navbar");
+
+    menuIcon.addEventListener("click", function () {
+        console.log("Menu icon clicked");
+        navbar.classList.toggle("open");
+        console.log(navbar.classList);
+    });
+    document.addEventListener("click", function (event) {
+        const isClickInsideNavbar = navbar.contains(event.target);
+        const isClickOnMenuIcon = menuIcon.contains(event.target);
+
+        if (!isClickInsideNavbar && !isClickOnMenuIcon && navbar.classList.contains("open")) {
+            navbar.classList.remove("open");
+        }
+    });
+//----------Users with accounts, guests in lobby--------------------------
+// Simulate a function that checks if a user is signed in
+function isUserLoggedIn() {
+        return localStorage.getItem("isUserLoggedIn") === "true"; //Example using localStorage
+    }
+    function redirectUser(event) {
+        event.preventDefault();
+        window.location.href = isUserLoggedIn() ? "0Soundboard-sign.html" : "0.5Soundboard-lobby.html";
+    }
+    const signInButton = document.querySelector("a[href='0Soundboard-sign.html']");
+    const lobbyButton = document.querySelector("a[href='0.5Soundboard-lobby.html']");
+
+    if(signInButton && lobbyButton) {
+        if(!isUserLoggedIn()) {
+            signInButton.style.display = "block";
+            lobbyButton.style.display = "none";
+        } else {
+            signInButton.style.display = "none";
+            lobbyButton.style.display = "block";
+        }
+    }
+//--------Notification DropDown----------------------------------------------
+const notificationIcon = document.getElementById("notificationIcon");
+    const notificationsDropdown = document.getElementById("notificationsDropdown");
+    const notificationsBadge = document.getElementById("notificationsBadge");
+    const notificationsList = document.getElementById("notificationsList");
+
+    let unreadCount = 3;
+
+    function updateNotificationBadge() {
+        if (unreadCount > 0) {
+            if (unreadCount > 99) {
+                notificationsBadge.textContent = "+99";
+            } else {
+                notificationsBadge.textContent = unreadCount;
+            }
+            notificationsBadge.classList.add("visible");
+        } else {
+            notificationsBadge.classList.remove("visible");
+        }
+    }
+    function receiveMessage(message) {
+        unreadCount++;
+        updateNotificationBadge();
+
+        const newMessage = document.createElement("li");
+        newMessage.textContent = message;
+        notificationsList.appendChild(newMessage);
+    }
+    notificationIcon.addEventListener("click", function (event) {
+        event.stopPropagation();
+        notificationsDropdown.classList.toggle("show");
+
+        if (notificationsDropdown.classList.contains("show")) {
+            unreadCount = 0;
+            updateNotificationBadge();
+        }
+    });
+    document.addEventListener("click", function (event) {
+        if (!notificationIcon.contains(event.target) && !notificationsDropdown.contains(event.target)) {
+            notificationsDropdown.classList.remove("show");
+        }
+    });
+    setInterval(() => {
+        receiveMessage("New message received!");
+    }, 3000);
+});
+</script>
+</body>
+</html>

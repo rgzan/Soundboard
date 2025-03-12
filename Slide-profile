@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<style>
+body{
+    background: repeating-linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0));
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    height:100vh;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+.Profile-container{
+    display:flex;
+    position:absolute;
+    justify-content:center;
+    align-items: center;
+    background:white;
+    width:50%;
+    height: 50%;
+}
+.Counter-Picture{
+    text-align: center;
+    justify-items: center;
+    position:absolute;
+    top:-30%;
+}
+.Profile-pic-css{
+    display:flex;
+    position:absolute;
+    justify-content: center;
+    align-items: center;
+    margin:10px 0;
+    background-color: rgba(0,0,0,0.7);
+    width:50%;
+    height:100%;
+    border-radius: 50%;
+}
+</style>
+<body style="background:black">
+    <div id="Profile-container">
+        <p class="Counter-Picture">Profile-picture</p>
+        <div class="Profile-pic-css" id="Profile-pic">
+            <div class="ProPicCh-css" id="Profile-change">Change your picture</div>
+        </div>
+        <button id="Submit" onclick="button()">Save</button>
+    </div>
+    <div id="Info-container">
+        <p class="Counter-title">Change your information</p>
+        <div id="Name">
+        </div>
+        <div id="Email">
+            <div class="Counter-Email">Email</div>
+            <input type="text" placeholder="Change your email">
+        </div>
+        <div id="Username">
+            <div class="Counter-Username">Username</div>
+            <input type="text" placeholder="Change your username">
+        </div>
+        <div id="Birthday">
+            <div class="Counter-Birthday">Birthday</div>
+            <select id="month">
+                <option value="" disabled selected>Month</option>
+            </select>
+            <input type="number" id="day" placeholder="Day" min="1" max="31">
+            <input type="number" id="year" placeholder="Year" min="1900" max="2007">
+        </div>
+        <div id="Password">
+            <div class="counter-password">Password</div>
+            <input type="password" placeholder="Change your password">
+        </div>
+        <div id="Discord">
+            <div class="counter-Discord-ID">Discord</div>
+            <input type="text" placeholder="Change your Discord ID">
+        </div>
+        <button id="Submit">Save</button>
+    </div>
+    <div id="Manage-Account">
+        <p class="Account">Manage your account</p>
+        <p>Anytime you want to come back again</p>
+        <button id="Submit">Deactivate your account?</button>
+        <p>Warning! You will not be able to log in after your account is permanently deleted</p>
+        <button id="Submit">Delete your account?</button>
+    </div>
+<script>
+</script>
+</body>
+</html>

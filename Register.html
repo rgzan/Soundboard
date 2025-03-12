@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<style>
+body{
+    background: linear-gradient(to left, rgb(100, 100, 0), rgba(50, 100, 50));
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    color:white;
+    height:100vh;
+}
+.Logo{
+    display:flex;
+    left:10px;
+    font-size:23px;
+    position: fixed;
+    text-decoration: none;
+    color: white;
+}
+/* Navgations, a */
+.nav-container{
+    width:100%;
+    height:55px;
+    display:flex;
+    justify-content: flex-end;
+    align-items:center;
+    position:fixed;
+    top:0;
+    z-index:1000;
+    background:rgba(0,0,0,0.8);
+    padding:0 20px;
+    box-sizing:border-box;
+}
+/*    Register Form      */
+#lg_outr{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    height:100vh
+}
+#lg_ctnr{
+    width:100%;
+    max-width:400px;
+    background-color: #f444;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    padding:20px;
+}
+#lg_innr{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
+.lg_frm h1{
+    margin-bottom:20px;
+    font-size:24px;
+    color:rgb(255, 255, 255);
+    text-align: center;
+}
+.fnm_fld, .lnm_fld {
+    width:43.94%;
+    height:40px;
+    margin:10px 0;
+    padding:0 10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:14px;
+    box-sizing:;
+}
+.em_fld, .usr_fld, .pw_fld, .confirm_pw_fld{
+    width:100%;
+    height:40px;
+    margin:10px 0;
+    padding:0 10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:14px;
+    box-sizing:border-box;
+}
+.brth_fld{
+    width:30%;
+    height:40px;
+    margin:10px 0;
+    padding:0 10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:14px;
+    box-sizing:border-box;
+}
+.sub_btn{
+    width:100%;
+    height:40px;
+    margin-top:20px;
+    background:#008BFF;
+    color:#fff;
+    text-decoration: none;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+.sub_btn:hover{
+    background:#0056b3;
+}
+input:focus{
+    outline:none;
+    border-color:#007BFF
+}
+</style>
+<body>
+    <div class="nav-container">
+        <a href="Login.html" class="Logo">Soundboard</a>
+    </div>
+    <div id="lg_outr" class="mn_outr">
+        <div id="lg_ctnr" class="mn_ctnr">
+            <div id="lg_innr" class="mn_innr">
+            <form class="lg_frm">
+            <h1>Register</h1>
+                <input class="fnm_fld" type="text" placeholder="First name" required>
+                <input class="lnm_fld" type="text" placeholder="Last name" required>
+                <input class="em_fld" type="email" placeholder="Email - ex.JohnSmith@domain.com" required>
+                <input class="usr_fld" type="text" placeholder="Username" required>
+            <div class="birthdate-container">
+                <select id="monthSelect" class="brth_fld" name="month" required>
+                    <option value="" disabled selected>Month</option>
+                </select>
+                <select id="daySelect" class="brth_fld" name="day" required>
+                    <option value="" disabled selected>Day</option>
+                </select>
+                <select id="yearSelect" class="brth_fld" name="year" required>
+                    <option value="" disabled selected>Year</option>
+                </select>
+                <input class="pw_fld" type="password" placeholder="Password" required>
+                <input class="confirm_pw_fld" type="password" placeholder="Confirm Password" required>
+                <input class="sub_btn" type="submit" value="Register">
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+<script>
+    const monthSelect = document.getElementById("monthSelect");
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    months.forEach((month, index) => {
+        const option = document.createElement("option");
+        option.value = index + 1;
+        option.textContent = month;
+        monthSelect.appendChild(option);
+    });
+    const daySelect = document.getElementById("daySelect");
+    for (let i = 1; i <= 31; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        daySelect.appendChild(option);
+    }
+    const yearSelect = document.getElementById("yearSelect");
+    const currentYear = new Date().getFullYear();
+    for (let i = currentYear; i >= 1900; i--) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        yearSelect.appendChild(option);
+    }
+    document.querySelector(".lg_frm").addEventListener("submit", function (event) {
+        const password = document.querySelector(".pw_fld").value;
+        const confirmPassword = document.querySelector(".confirm_pw_fld").value;
+
+        if(password !== confirmPassword) {
+            event.preventDefault();
+            alert("Passwords do not match. Please try again. :D");
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html style="font-size:26px; font-family:sans-serif;" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Soundboard</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<style>
+body{
+    background:black;
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+}
+h1{
+    color:#ffcc00;
+}
+#chat-box{
+    width:50%;
+    height:50%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius:10px;
+    background:grey
+}
+#message-input{
+    
+}
+#send-btn{
+    background:yellowgreen;
+    border: none;
+    padding:12px;
+    cursor:pointer;
+}
+#send-btn:hover{
+    background:#1e1e1e;
+}
+#friends-list{
+    font-family: Arial, sans-serif;
+    background:#1e1e1e;
+    color:white;
+}
+#addfriend, #removefriend {
+    display:flex;
+    position:absolute;
+    border:none;
+    border-radius: 100%;
+}
+h3{
+    color:#ffcc00;
+    display:flex;
+    position:relative;
+
+}
+li, ul #friends-list{
+    text-decoration: none;
+}
+
+/* Chat-box size CSS */
+/*
+@media (max-width:1400px){
+    #chat-box{
+        width:60%;
+    }
+    #message-input{
+        width:60%;
+    }
+    #friends-list{
+        width:60%;
+    }
+}
+@media (max-width:1400px){
+    #chat-box{
+        width:55%;
+    }
+    #message-input{
+        width:55%;
+    }
+    #friends-list{
+        width:55%;
+    }
+}
+@media (max-width:){
+    #chat-box{
+        width:;
+    }
+    #message-input{
+        width:;
+    }
+    #friends-list{
+        width:;
+    }
+}
+@media (max-width:) {
+    #chat-box{
+        width:;
+    }
+    #message-input{
+        width:;
+    }
+    #friends-list{
+        width:;
+    }
+} */
+</style>
+</head>
+<body>
+    <h1>Chatroom</h1>
+    <div id="chat-box">
+        <input type="text" id="message-input" placeholder="Type your message...">
+        <button id="send-btn" style="font-family:Arial, Helvetica, sans-serif">Send</button>
+    </div>
+    <div id="friends-list">
+        <h3>Friends-list</h3>
+        <input type="text" id="search" placeholder="Search people">
+        <div id="addfriendbutton">
+            <button id="addfriend"></button>
+        </div>
+        <div id="removefriendbutton">
+            <button id="removefriend"></button>
+        </div>
+        <div id="friendlistbutton">
+            <button id="friendlist"></button>
+            <li><ul>Name</ul></li>
+            <li><ul>Name</ul></li>
+            <li><ul>Name</ul></li>
+        </div>
+    </div>
+<script tpye="module">
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import {getDatabase, ref, push, onChildAdded} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        databaseURL: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const chatRef = ref(db, 'message');
+
+    document.getElementById('send-btn').addEventListener('click', () => {
+        const message = document.getElementById('message-input').value;
+        if (message.trim()) {
+            push(chatRef, { text: message });
+            document.getElementById('message-input').value = '';
+        }
+    });
+    onChildAdded(chatRef, (snapshot) => {
+        const message = snapshot.val().text;
+        const msgElement = document.createElement('div');
+        msgElement.textContent = message;
+        msgElement.style.padding = '5px 10px';
+        msgElement.style.borderBottom = '1px solid #ddd';
+        document.getElementById('chat-box').prepend(msgElement);
+    });
+</script>
+<script>
+//----------MenuBars-------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function() {
+        // Menu toggle logic
+        const menuIcon = document.getElementById("menuIcon");
+        const navbar = document.getElementById("navbar");
+
+        menuIcon.addEventListener("click", function () {
+            console.log("Menu icon clicked");
+            navbar.classList.toggle("open");
+            console.log(navbar.classList);
+        });
+        document.addEventListener("click", function (event) {
+            const isClickInsideNavbar = navbar.contains(event.target);
+            const isClickOnMenuIcon = menuIcon.contains(event.target);
+
+            if (!isClickInsideNavbar && !isClickOnMenuIcon && navbar.classList.contains("open")) {
+                navbar.classList.remove("open");
+            }
+        });
+//--------Notification DropDown----------------------------------------------
+const notificationIcon = document.getElementById("notificationIcon");
+    const notificationsDropdown = document.getElementById("notificationsDropdown");
+    const notificationsBadge = document.getElementById("notificationsBadge");
+    const notificationsList = document.getElementById("notificationsList");
+
+    let unreadCount = 3;
+
+    function updateNotificationBadge() {
+        if (unreadCount > 0) {
+            if (unreadCount > 99) {
+                notificationsBadge.textContent = "+99";
+            } else {
+                notificationsBadge.textContent = unreadCount;
+            }
+            notificationsBadge.classList.add("visible");
+        } else {
+            notificationsBadge.classList.remove("visible");
+        }
+    }
+    function receiveMessage(message) {
+        unreadCount++;
+        updateNotificationBadge();
+
+        const newMessage = document.createElement("li");
+        newMessage.textContent = message;
+        notificationsList.appendChild(newMessage);
+    }
+    notificationIcon.addEventListener("click", function (event) {
+        event.stopPropagation();
+        notificationsDropdown.classList.toggle("show");
+
+        if (notificationsDropdown.classList.contains("show")) {
+            unreadCount = 0;
+            updateNotificationBadge();
+        }
+    });
+    document.addEventListener("click", function (event) {
+        if (!notificationIcon.contains(event.target) && !notificationsDropdown.contains(event.target)) {
+            notificationsDropdown.classList.remove("show");
+        }
+    });
+    setInterval(() => {
+        receiveMessage("New message received!");
+    }, 3000);
+});
+</script>
+</body>
+</html>

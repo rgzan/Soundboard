@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html style="font-size:26px; font-family:sans-serif;" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario Kart Item Selector - Soundboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.3/css/ionicons.min.css">
+</head>
+<style>
+body {
+    background-color: #121212;
+    color: white;
+    text-align: center;
+}
+header{
+    width:100%;
+    height:55.5px;
+    background:rgb(177, 106, 0);
+    color:rgb(0, 0, 0);
+    display:flex;
+    box-shadow: 0px 4px 3px;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    z-index:10;
+}
+.top-container{
+    display:flex;
+    align-items: center;
+    padding:0 10px;
+}
+.top-container .logo{
+    color:white;
+    text-decoration: none;
+    font-size:26px;
+}
+/* Center Section */
+.center{
+    display:flex;
+    justify-content: center;
+    align-items: flex-end;
+    width:40%;
+    gap:20px;
+    padding:0;
+}
+/* Chatbubble, Chatbubble alert */
+.chatbble {
+    position: relative; /* Change from absolute */
+    left:50%;
+    top:auto;
+    margin-right: 20px; /* Adjust if necessary */
+    display: flex;
+    align-items: center;
+}
+.chatbble ion-icon{
+    color:rgb(171,171,171);
+    width:35px;
+    height:35px;
+    padding:5px 5px;
+    border-radius: 5%;
+    transition: 0.3s background;
+}
+.chatbble:hover ion-icon{
+    background-color:darkgrey;
+}
+/* Notifications, Notification alerts */
+.notification-icon{
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    top:5px;
+    left:52%;
+    position:absolute;
+    width:45px;
+    height:45px;
+    padding:5px 5px;
+    cursor:pointer;
+    border-radius: 5%;
+    transition: 0.3s background;
+}
+.notification-icon:hover{
+    background:darkgrey;
+}
+.notifications-badge{
+    position:absolute;
+    top:-2px;
+    right:-2px;
+    background:red;
+    color:white;
+    font-size:12px;
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    display:none;
+    align-items: center;
+    justify-content: center;
+    z-index:1;
+}
+.notifications-badge.visible {
+    display:flex;
+}
+.notifications-dropdown{
+    font-size: 21px;
+    display:flex;
+    flex-direction: column;
+    position:absolute;
+    top:48.99px;
+    right:0;
+    background:black;
+    border-radius:5px;
+    width:200px;
+    box-shadow:0 2px rgba(0,0,0,0.2);
+    z-index:1000;
+    display: none;
+    cursor:pointer;
+    pointer-events: all;
+    max-height:300px;
+    overflow-y: auto;
+}
+.notifications-dropdown.show{
+    display:block;
+}
+.notifications-dropdown ul{
+    margin:0;
+    padding:0;
+}
+.notifications-dropdown li{
+    border-radius: 5px;
+    padding:6px;
+    list-style: none;
+}
+.notifications-dropdown li:hover{
+    background-color: grey;
+}
+/* Navgations, a */
+.navbar {
+    display:flex;
+}
+.navbar a{
+    text-decoration: none;
+    padding:0 10px;
+    color:rgb(171,171,171);
+    transition: background 0.3s ease;
+}
+.navbar a:hover{
+    background:darkgrey;
+}
+.nav-item{
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+    border-radius: 5%;
+    transition: background 0.3s;
+}
+.nav-item:hover{
+    background:darkgrey;
+}
+.nav-content{
+    display:flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+.nav-content ion-icon,
+.nav-content svg{
+    width:35px;
+    height:35px;
+}
+.text{
+    font-size:13px;
+}
+/* Mobile Menu Icon */
+.menu-icon{
+    position:fixed;
+    flex-direction: column;
+    top:12px;
+    right:10px;
+    z-index:20;
+    cursor:pointer;
+}
+.menu-icon div{
+    width:25px;
+    height:1px;
+}
+@media (max-width:1242px) {
+    .text{
+        font-size:12px;
+    }
+}
+@media (min-width:325px) and (max-width:1072px) {
+    .text{
+        font-size:15px;
+        padding:8px;
+    }
+    .navbar{
+        flex-direction:column;
+        background:black;
+        position:absolute;
+        top:55px;
+        right:0;
+        padding:0;
+        width:200px;
+        display:none;
+        pointer-events: none;
+    }
+    .navbar.open{
+        display:flex;
+        pointer-events:auto;
+    }    
+    .nav-content{
+        flex-direction: row;
+    }
+    .menu-icon{
+        width:50px;
+        height:50px;
+    }
+    /* Button in media */
+    #buttonContainer{
+        top:50px;
+    }
+    button{
+        font-size:12px;
+        min-width:120px;
+        padding:8px 16px;
+    }
+}
+@media (max-width:1072px) {
+    .text{
+        font-size:14px;
+        padding:8px;
+    }
+    .navbar{
+        flex-direction:column;
+        background:black;
+        position:absolute;
+        top:55px;
+        right:0;
+        padding:0;
+        width:200px;
+        display:none;
+        pointer-events: none;
+    }
+    .navbar.open{
+        display:flex;
+        pointer-events:auto;
+    }    
+    .nav-content{
+        flex-direction: row;
+    }
+    .menu-icon{
+        width:50px;
+        height:50px;
+    }
+    /* Button in media */
+    #buttonContainer{
+        top:50px;
+    }
+    button{
+        font-size:12px;
+        min-width:120px;
+        padding:8px 16px;
+    }
+}
+</style>
+<body>
+<header>
+    <div class="top-container">
+        <a href="Login.html" onclick="redirectUser(event)" class="logo">Soundboard</a>
+    </div>
+    <div class="center">
+    <!-----ChatBubble------------------------------------------->
+<!-- Move this inside the <nav class="navbar"> -->
+    <a href="7Chatbubble.html" onclick="redirectUser(event)" class="chatbble">
+        <div class="nav-content">
+            <ion-icon name="chatbubbles-sharp"></ion-icon>
+        </div>
+    </a>
+    <!-- Notification Bell -->
+    <div class="notifications">
+        <div class="notification-icon" id="notificationIcon" aria-label="Notifications">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="30" height="30" fill="rgb(171,171,171)" box-shadow="2px 2px">
+                <path d="M56,44c-1.832,0-4-2.168-4-4V20C52,8.973,43.027,0,32,0S12,8.973,12,20v20c0,1.793-2.207,4-4,4 
+                    c-2.211,0-4,1.789-4,4s1.789,4,4,4h48c2.211,0,4-1.789,4-4S58.211,44,56,44z"></path>
+                <path d="M32,64c4.418,0,8-3.582,8-8H24C24,60.418,27.582,64,32,64z"></path>
+            </svg>
+    <!--------Notifications alert will be appeared------------>
+            <span class="notifications-badge" id="notificationsBadge"></span>
+                <div class="notifications-dropdown" id="notificationsDropdown">
+                    <ul id="notificationsList">
+                        <li>No new notifications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--------Menu Bars-------------------------------------------------------------->
+<div class="menu-icon" id="menuIcon">
+    <svg viewBox="1 5 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 7C5 6.44772 5.44772 6 6 6H18C18.5523 6 19 6.44772 19 7C19 7.55228 18.5523 8 18 8H6C5.44772 8 5 7.55228 5 7ZM5 12C5 11.4477 5.44772 11 6 11H18C18.5523 11 19 11.4477 19 12C19 12.5523 18.5523 13 18 13H6C5.44772 13 5 12.5523 5 12ZM5 17C5 16.4477 5.44772 16 6 16H18C18.5523 16 19 16.4477 19 17C19 17.5523 18.5523 18 18 18H6C5.44772 18 5 17.5523 5 17Z" fill="rgb(171, 171, 171)"></path>
+    </svg>
+</div>
+<!-- Navbar Links -->
+<nav class="navbar" id="navbar">
+    <a href="0Soundboard-sign.html" onclick="redirectUser(event)" class="nav-item" role="Soundboard-logo">
+        <div class="nav-content">
+            <svg viewBox="2 0 20 20" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" stroke="rgb(171,171,171)">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier"><defs></defs>
+                <line class="cls-1" x1="0.5" y1="21.58" x2="6.25" y2="21.58"></line>
+                <line class="cls-1" x1="9.13" y1="21.58" x2="14.88" y2="21.58"></line>
+                <line class="cls-1" x1="17.75" y1="21.58" x2="23.5" y2="21.58"></line>
+                <line class="cls-1" x1="0.5" y1="17.75" x2="6.25" y2="17.75"></line>
+                <line class="cls-1" x1="9.13" y1="17.75" x2="14.88" y2="17.75"></line>
+                <line class="cls-1" x1="17.75" y1="17.75" x2="23.5" y2="17.75"></line>
+                <line class="cls-1" x1="0.5" y1="13.92" x2="6.25" y2="13.92"></line>
+                <line class="cls-1" x1="9.13" y1="13.92" x2="14.88" y2="13.92"></line>
+                <line class="cls-1" x1="17.75" y1="13.92" x2="23.5" y2="13.92"></line>
+                <line class="cls-1" x1="9.13" y1="10.08" x2="14.88" y2="10.08"></line>
+                <line class="cls-1" x1="17.75" y1="10.08" x2="23.5" y2="10.08"></line>
+                <line class="cls-1" x1="9.13" y1="6.25" x2="14.88" y2="6.25"></line>
+                <line class="cls-1" x1="9.13" y1="2.42" x2="14.88" y2="2.42"></line></g>
+            </svg>
+            <span class="text">Soundboard</span>
+        </div>
+    </a>
+    <a href="2Donation.html" onclick="redirectUser(event)" class="nav-item" role="Donation-logo">
+        <div class="nav-content">
+            <ion-icon name="heart-outline"></ion-icon>
+            <span class="text">Donation</span>
+        </div>
+    </a>
+    <a href="3Profile.html" onclick="redirectUser(event)" class="nav-item" role="Profile-logo">
+        <div class="nav-content">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <span class="text">Profile</span>
+        </div>
+    </a>
+    <a href="4Invite-Bot.html" onclick="redirectUser(event)" class="nav-item" role="Invite Bot-logo">
+        <div class="nav-content">
+            <svg fill="grey" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+            <path d="M21.928 11.607c-.202-.488-.635-.605-.928-.633V8c0-1.103-.897-2-2-2h-6V4.61c.305-.274.5-.668.5-1.11a1.5 
+            1.5 0 0 0-3 0c0 .442.195.836.5 1.11V6H5c-1.103 0-2 .897-2 2v2.997l-.082.006A1 1 0 0 0 1.99 12v2a1 1 0 0 0 1 1H3v5c0 
+            1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5a1 1 0 0 0 1-1v-1.938a1.006 1.006 0 0 0-.072-.455zM5 20V8h14l.001 
+            3.996L19 12v2l.001.005.001 5.995H5z"></path>
+            <ellipse cx="8.5" cy="12" rx="1.5" ry="2">
+            </ellipse><ellipse cx="15.5" cy="12" rx="1.5" ry="2">
+            </ellipse><path d="M8 16h8v2H8z"></path></g></svg>
+            <span class="text">Invite Bot</span>
+        </div>
+    </a>
+    <a href="5Contact.html" onclick="redirectUser(event)" class="nav-item" role="Contact-logo">
+        <div class="nav-content">
+            <ion-icon name="mail-outline"></ion-icon>
+            <span class="text">Contact us</span>
+        </div>
+    </a>
+    <a href="6AboutUs.html" onclick="redirectUser(event)" class="nav-item" role="About Us-logo">
+        <div class="nav-content">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span class="text">About us</span>
+        </div>
+    </a>
+    <a href="1Login.html" onclick="redirectUser(event)" class="nav-item" role="Login-signout-logo">
+        <div class="nav-content">
+            <ion-icon name="log-out-outline"></ion-icon>
+            <span class="text">Sign out</span>
+        </div>
+    </a>
+</nav>
+</header>
+<style>
+    mb-4{
+        top:50%;
+    }
+</style>
+<div class="container mt-4">
+    <h1 class="mb-4">🏎️ MK8DX item callout</h1>
+    <div class="container mt-5">
+        <div class="hint-box p-3" onclick="toggleHint()">
+            <span>How to use soundboard <strong>MUST READ</strong></span>
+            <span class="hint-icon">❔</span>
+        </div>
+        <div id="hintContent" class="hint-content">
+            <h5>Switch Logic</h5>
+            <p>we do have both logic between "Call item + Position" and "Call item" </p>
+            <p> if you select <strong>Call item + Position</strong> you must press on the number to select the current position then click on the item you have on hand</p>
+            <p> if you select <strong>Call item only</strong> you can only press item That must be easier to use</p>
+            <hr>
+            <h6>Required item need to ask to use it</h6>
+            <p><mark>These item no need to press number button before item</mark></p>
+            <ul>
+                <li><strong>Blue Shell</strong></li>
+                <li><strong>Ghost</strong></li>
+                <li><strong>Shock</strong></li>
+            </ul>
+        </div>
+    </div>
+        <!-- ✅ Select Box สำหรับเลือกโหมด -->
+        <select id="modeSelector" class="form-select select-mode">
+            <option value="call-item-position">Call Item + Position</option>
+            <option value="call-item-only">Call Item Only</option>
+        </select>
+
+        <!-- ✅ ปุ่มตัวเลข (ตำแหน่ง) -->
+        <div class="position-container">
+            <script>
+                for (let i = 1; i <= 12; i++) {
+                    document.write(`<div class="position" ondblclick="callPosition(${i})" onclick="selectPosition(${i})">${i}</div>`);
+                }
+            </script>
+        </div>
+        <!-- ✅ ปุ่มไอเทม -->
+        <p><mark>These items do not need a request to use</mark></p>
+        <div class="item-grid">
+            <button class="item-btn" onclick="useItem('Banana')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail01.png" class="item-img" alt="Banana">
+            <button class="item-btn" onclick="useItem('Triple Bananas')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail02.png" class="item-img" alt="Triple Bananas">
+            </button>
+
+            <button class="item-btn" onclick="useItem('Red Shell')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail05.png" class="item-img" alt="Red Shell">
+            </button>
+
+            <button class="item-btn" onclick="useItem('Triple Redshells')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail06.png" class="item-img" alt="Triple Redshells">
+            </button>
+
+            <button class="item-btn" onclick="useItem('Piranha Plant')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail18.png" class="item-img" alt="Piranha Plant">
+            </button>
+            <button class= "item-btn" onclick="useItem('Green Shell')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail03.png" class="item-img" alt="Green Shell">
+            </button>
+            <button class= "item-btn" onclick="useItem('Triple Green Shells')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail04.png" class="item-img" alt="Triple Green Shells">
+            </button>
+            <button class= "item-btn" onclick="useItem('Single Mushroom')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail09.png" class="item-img" alt="Mushroom">
+            </button>
+            <button class= "item-btn" onclick="useItem('Triple Mushrooms')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail10.png" class="item-img" alt="Triple Mushrooms">
+            </button>
+            <button class= "item-btn" onclick="useItem('bullet bills')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail12.png" class="item-img" alt="Bullet Bills">
+            </button>
+            <button class= "item-btn" onclick="useItem('Boomerang')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail17.png" class="item-img" alt="Boomerang Flower">
+            </button>
+            <button class= "item-btn" onclick="useItem('Star')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail15.png" class="item-img" alt="Star">
+            </button>
+            <button class= "item-btn" onclick="useItem('Fire Flower')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail16.png" class="item-img" alt="Fire Flower">
+            </button>
+            <button class= "item-btn" onclick="useItem('Super Horn')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail19.png" class="item-img" alt="Super Horn">
+            </button>
+            <button class= "item-btn" onclick="useItem('Bomb')">
+                <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail08.png" class="item-img" alt="Bomb">
+        </div>
+        <p> </p>
+        <p><mark>These items <strong>REQUIRED TO ASK FOR ACCEPTION FROM LEADER</strong></mark></p>
+        <div class="container mt-4"></div>
+            <div class="item-grid">
+                <button class="item-btn" onclick="useItem('Ghost')">
+                    <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail23.png" class="item-img" alt="Ghost">
+                </button>
+                <button class="item-btn" onclick="useItem('Blue Shell')">
+                    <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail07.png" class="item-img" alt="Blue Shell">
+                </button>
+                <button class="item-btn" onclick="useItem('Shock')">
+                    <img src="https://www.nintendo.com/ph/switch/aabp/assets/images/item/img_detail14.png" class="item-img" alt="Shock">
+                </button>
+            </div>
+
+        <div id="status" class="mt-3"></div>
+    </div>
+
+<script>
+//----------MenuBars-------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function() {
+        // Menu toggle logic
+        const menuIcon = document.getElementById("menuIcon");
+        const navbar = document.getElementById("navbar");
+
+        menuIcon.addEventListener("click", function () {
+            console.log("Menu icon clicked");
+            navbar.classList.toggle("open");
+            console.log(navbar.classList);
+        });
+        document.addEventListener("click", function (event) {
+            const isClickInsideNavbar = navbar.contains(event.target);
+            const isClickOnMenuIcon = menuIcon.contains(event.target);
+
+            if (!isClickInsideNavbar && !isClickOnMenuIcon && navbar.classList.contains("open")) {
+                navbar.classList.remove("open");
+            }
+        });
+//----------Users with accounts, guests in lobby--------------------------
+// Simulate a function that checks if a user is signed in
+function isUserSignedIn() {
+        return localStorage.getItem("userLoggedIn") === "true"; //Example using localStorage
+    }
+    function redirectUser(event) {
+        event.preventDefault();
+
+        if (isUserSignedIn()) {
+            window.location.href = "0Soundboard-sign.html"; //Redirect signed-in users
+        } else {
+            window.location.href = "0.5Soundboard-lobby.html" //Redirect guests to the lobby
+        }
+    }
+//--------Notification DropDown----------------------------------------------
+const notificationIcon = document.getElementById("notificationIcon");
+    const notificationsDropdown = document.getElementById("notificationsDropdown");
+    const notificationsBadge = document.getElementById("notificationsBadge");
+    const notificationsList = document.getElementById("notificationsList");
+
+    let unreadCount = 3;
+
+    function updateNotificationBadge() {
+        if (unreadCount > 0) {
+            if (unreadCount > 99) {
+                notificationsBadge.textContent = "+99";
+            } else {
+                notificationsBadge.textContent = unreadCount;
+            }
+            notificationsBadge.classList.add("visible");
+        } else {
+            notificationsBadge.classList.remove("visible");
+        }
+    }
+    function receiveMessage(message) {
+        unreadCount++;
+        updateNotificationBadge();
+
+        const newMessage = document.createElement("li");
+        newMessage.textContent = message;
+        notificationsList.appendChild(newMessage);
+    }
+    notificationIcon.addEventListener("click", function (event) {
+        event.stopPropagation();
+        notificationsDropdown.classList.toggle("show");
+
+        if (notificationsDropdown.classList.contains("show")) {
+            unreadCount = 0;
+            updateNotificationBadge();
+        }
+    });
+    document.addEventListener("click", function (event) {
+        if (!notificationIcon.contains(event.target) && !notificationsDropdown.contains(event.target)) {
+            notificationsDropdown.classList.remove("show");
+        }
+    });
+    setInterval(() => {
+        receiveMessage("New message received!");
+    }, 3000);
+});
+//--------AlertBox, buttonContainers-----------------------------------------------------
+const buttonContainer = document.getElementById('buttonContainer');
+        buttonContainer.appendChild(button);
+        
+    //-------- VC in box for sign up or sign in only----------------
+//    createButton('Join VC', 'http://pxteam.site/api/bot/joinvc', 'Call', true, {
+//        guild_id: '1303960808253952081',
+//        vc_id: '1303960808707067956',
+//    });
+//    createButton('Hang up', 'http://pxteam.site/api/bot/leavevc', 'Hang_Up', true, {
+//        guild_id: '1303960808253952081',
+//        vc_id: '1303960808707067956',
+//    });
+//    createButton('Use it now!', 'http://pxteam.site/api/bot/play-sound', 'Use_It_Now', true, {
+//        guild_id: '1303960808253952081',
+//        file_name: 'Use_It_Now',
+//    });
+    //--------------- Create buttons for soundboard functionality-----------------------------
+    createButton('An item box', 'http://pxteam.site/api/bot/play-sound', 'An_Item_Box', true, {
+        guild_id: '1303960808253952081',
+        file_name: 'An_Item_Box',
+    });
+    createButton('Banana Peel', '??', 'Banana_Peel', true, {
+        guild_id: '#',
+        file_name: 'Banana_Peel',
+    });
+    createButton('Bell (Animal Crossing)', '', 'Bell', true, {
+        guild_id: '#',
+        file_name: 'Bell',
+    });
+    createButton('Blooper', '', 'Blooper', true, {
+        guild_id: '#',
+        file_name: 'Blooper',
+    });
+    createButton('Bob-omb', '', 'Bob_omb', true, {
+        guild_id: '#',
+        file_name: 'Bob_omb',
+    });
+    createButton('Boomerang Flower', '', 'Boomerang_Flower', true, {
+        guild_id: '#',
+        file_name: 'Boomerang_Flower',
+    });
+    createButton('Bullet Bill', 'http://pxteam.site/api/bot/play-sound', 'Bullet_Bill', true, {
+        guild_id: '1303960808253952081',
+        file_name: 'Bullet_Bill',
+    });
+    createButton('Coin', '???', 'Coin', true, {
+        guild_id: '#',
+        file_name: 'Coin',
+    });
+    createButton('Crazy Eight', '???', 'Crazy_Eight', true, {
+        guild_id: '#',
+        file_name: 'Crazy_Eight',
+    });
+    createButton('Dash Mushroom', '???', 'Dash_Mushroom', true, {
+        guild_id: '#',
+        file_name: 'Dash_Mushroom',
+    });
+    createButton('Double Item Boxes', 'http://pxteam.site/api/bot/play-sound', 'Double_Item_Boxes', true, {
+        guild_id: '1303960808253952081',
+        file_name: 'Double_Item_Boxes',
+    });
+    createButton('Fire Flower', '???', 'Fire_Flower', true, {
+        guild_id: '#',
+        file_name: 'Fire_Flower',
+    });
+    createButton('Golden Dash Mushroom', '???', 'Golden_Dash_Mushroom', true, {
+        guild_id: '#',
+        file_name: 'Golden_Dash_Mushroom',
+    });
+    createButton('Green Shell', '???', 'Green_Shell', true, {
+        guild_id: '#',
+        file_name: 'Green_Shell',
+    });
+    createButton('Lightning', 'http://pxteam.site/api/bot/play-sound', 'Lightning', true, {
+        guild_id: '1303960808253952081',
+        file_name: 'Lightning', /* renamed shock to lightning */
+    });
+    createButton('Potted Pirahna Plant', '???', 'Potted_Pirahna_Plant', true, {
+        guild_id: '#',
+        file_name: 'Potted_Pirahna_Plant',
+    });
+    createButton('Red Shell', '???', 'Red_Shell', true, {
+        guild_id: '#',
+        file_name: 'Red_Shell',
+    });
+    createButton('Rupee', '???', 'Rupee', true, {
+        guild_id: '#',
+        file_name: 'Rupee',
+    });
+    /* Rename 'They have a blueshell to Shiny Shell' and 'Blueshell to Shiny_Shell' */
+    createButton('Shiny Shell', 'http://pxteam.site/api/bot/play-sound', 'Shiny_Shell', true, {
+        guild_id: '1303960808253952081',
+        file_name: 'Shiny_Shell', /* renamed they_have_blueshell to Shiny_Shell*/
+    });
+    createButton('Super Horn', '???', 'Super_Horn', true, {
+        guild_id: '#',
+        file_name: 'Super_Horn',
+    });
+    createButton('Super Star', '???', 'Super_Star', true, {
+        guild_id: '#',
+        file_name: 'Super_Star',
+    });
+    createButton('Triple Bananas', 'http://pxteam.site/api/bot/play-sound', 'Triple_Bananas', true, {
+        guild_id: '1303960808253952081',
+        file_name: 'Triple_Bananas',
+    });
+    createButton('Triple Greenshells', 'http://pxteam.site/api/bot/play-sound', 'Triple_Greenshells', true, {
+        guild_id: '1303960808253952081',
+        file_name: 'Triple_Greenshells',
+    });
+    createButton('Triple Mushrooms', '???', 'Triple_Mushrooms', true, {
+        guild_id: '#',
+        file_name: 'Triple_Mushrooms',
+    });
+    createButton('Triple Redshells', 'http://pxteam.site/api/bot/play-sound', 'Triple_Redshells', true, {
+        guild_id: '1303960808253952081',
+        file_name: 'Triple_Redshells', /* Two letters T and R captized from lowercase */
+    });
+});
+//--------- VC  --------------
+    // เรียกใช้ฟังก์ชัน createButton สำหรับ Join VC
+createButton(
+    'Join VC',
+    'http://pxteam.site/api/bot/joinvc',
+    'Call',
+    true, // POST
+    { guild_id: '1303960808253952081', vc_id: '1303960808707067956' } // ส่งเป็น String เพื่อเลี่ยงการแปลงเลขผิด
+);
+createButton(
+    'Hang up',
+    'http://pxteam.site/api/bot/leavevc', /* renamed leave vc to hang up */
+    'Hang up?',
+    true, // POST
+    { guild_id: '1303960808253952081' , vc_id: '1303960808707067956'} // Guild ID ที่ต้องการ
+);
+createButton(
+    'Use it now',
+    '', 
+    'Use_It_Now', 
+    true,
+    { guild_id: '#', vc_id: '#'}
+);
+//-----Buttons of MK items-------------------------------------------------
+createButton(
+    'An Item Box',
+    '',
+    'An_Item_Box',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Banana Peel',
+    '',
+    'Banana_Peel',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Bell',
+    '',
+    'Bell_Animal_Crossing',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Blooper',
+    '',
+    'Blooper',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Bob-omb',
+    '',
+    'Bob_omb',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Boomerang Flower',
+    '',
+    'Boomerang_Flower',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Bullet Bill',
+    '',
+    'Bullet_Bill',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Coin',
+    '',
+    'Coin',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Crazy Eight',
+    '',
+    'Crazy_Eight',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Dash Mushroom',
+    '',
+    'Dash_Mushroom',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Double Item Boxes',
+    '',
+    'Double_Item_Boxes',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Fire Flower',
+    '',
+    'Fire_Flower',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Golden Dash Mushroom',
+    '',
+    'Golden_Dash_Mushroom',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Green Shell',
+    '',
+    'Green_Shell',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Lightning',
+    '',
+    'Lightning',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Potted Piranha Plant',
+    '',
+    'Potted_Piranha_Plant',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Red Shell',
+    '',
+    'Red_Shell',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Rupee',
+    '',
+    'Rupee',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Shiny Shell',
+    '',
+    'Shiny_Shell',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Super Horn',
+    '',
+    'Super_Horn',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Super Star',
+    '',
+    'Super_Star',
+    true,
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Triple Bananas',
+    '',
+    'Triple_Bananas',
+    true, 
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Triple Greenshells',
+    'http://pxteam.site/api/bot/play-sound',
+    'Triple_Greenshells',
+    true,
+    { guild_id: '1303960808253952081', file_name: 'triple_greenshell' }
+);
+createButton(
+    'Triple Mushrooms',
+    '',
+    'Triple_Mushrooms',
+    true, 
+    { guild_id: '', file_name: '' }
+);
+createButton(
+    'Triple Redshells',
+    'http://pxteam.site/api/bot/play-sound',
+    'Triple_Redshells',
+    true,
+    { guild_id: '1303960808253952081', file_name: 'Triple_Redshells' }
+);
+console.log(`Button created: ${label}`);
+
+//createButton('', 'Lightning', 'Lightning', 'Call',true);
+//createButton('', 'Shiny Shell (blue)', 'Blueshell', 'Call',true);
+//createButton('', 'They have a shock!', 'Shock', 'Call',true);
+//createButton(
+//    '', // Label
+//    '', // API URL
+//    '', // CSS Class
+//    true, // isPost need to "true" because need method post
+//    { guild_id: '', file_name: '' } // JSON Body
+//);
+//Function to fetch data from the API
+</script>
+</body>
+</html>

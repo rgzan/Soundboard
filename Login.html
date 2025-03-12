@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<style>
+body{
+    background: repeating-linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0));
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    color:white;
+    height:100vh;
+}
+.Logo{
+    display:flex;
+    left:10px;
+    font-size:23px;
+    position: fixed;
+    text-decoration: none;
+    color: white;
+}
+/* Navgations, a */
+.nav-container{
+    width:100%;
+    height:55px;
+    display:flex;
+    justify-content: flex-end;
+    align-items:center;
+    position:fixed;
+    top:0;
+    z-index:1000;
+    background:rgba(0,0,0,0.8);
+    box-shadow: 2px 2px 2px grey;
+    padding:0 20px;
+    box-sizing:border-box;
+}
+/*     Login Form      */
+input{
+    background:rgba(145, 145, 145, 0.407);
+    color:rgb(255, 255, 255);
+}
+#lg_outr{
+    display:flex;
+    justify-content: center;
+    align-items:center; 
+    height:100vh
+}
+#lg_ctnr{
+    width:100%;
+    max-width:400px;
+    border-radius:10px;
+    background-color: rgba(254, 157, 1, 0.415);
+    backdrop-filter:blur(20px);
+    box-shadow:0 4px 10px rgba(0,0,0,0.45);
+    padding:20px;
+}
+#lg_innr{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
+.lg_frm h1{
+    margin-bottom:20px;
+    font-size:24px;
+    color:rgb(255, 255, 255);
+    text-align: center;
+}
+.usr_fld, .pw_fld{
+    width:100%;
+    height:40px;
+    margin:10px 0;
+    padding:0 10px;
+    border:1px solid rgb(158, 64, 64);
+    border-radius:5px;
+    font-size:14px;
+    box-sizing:border-box;
+}
+.sub_btn{
+    width:100%;
+    height:40px;
+    margin-top:20px;
+    background:#008BFF;
+    color:#fff;
+    text-decoration: none;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+.sub_btn:hover{
+    background:#0056b3;
+}
+input:focus{
+    outline:none;
+    border-color:#007BFF
+}
+</style>
+<body>
+    <div class="nav-container">
+        <a href="Login.html" class="Logo">Soundboard</a>
+    </div>
+<!---- Login Form ---->
+    <div id="lg_outr" class="mn_outr">
+        <div id="lg_ctnr" class="mn_ctnr">
+            <div id="lg_innr" class="mn_innr">
+            <form class="lg_frm">
+            <h1>Log in</h1>
+                <input class="usr_fld" type="text" placeholder="Username">
+                <input class="pw_fld" type="password" placeholder="Password">
+                <input class="sub_btn" type="submit" value="Log in"/>
+                <a href="Register.html" class="sub_btn" type="submit" value="Register">Register</a>
+            </form>
+            </div>
+        </div>
+    </div>
+<script>
+
+</script>
+</body>
+</html>
